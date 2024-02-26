@@ -1,6 +1,7 @@
 # Açıklama
 Bu projede STM32F745ZGT6 işlemcisine özel fonksiyonlar ve uygulamalar geliştirilmektedir. Geliştirilen PCB üzerindeki sensör, entegre, haberleşme protokolleri ve çeşitli çevre birimleri kullanılmaktadır.<br/> <br/>
 **Kullanılan Program** <br/> -Keil MDK-ARM Professional Version 5.29.0.0 <br/>
+## [v.0.0.0.5] - 22.02.2024 Bootcamp_RTOS_7Seg_Relay_Embedded_Code Klasörü Source Klasörü İçine Eklendi**
 ## [v.0.0.0.4] - 18.02.2024 Bootcamp_OptocuplerRead_Embedded_Code Klasörü Source Klasörü İçine Eklendi** <br/>
 ## [v.0.0.0.3] - 14.02.2024 Bootcamp_ADCDriver_Embedded_Code Klasörü Source Klasörü İçine Eklendi** <br/>
 ## [v.0.0.0.2] - 12.02.2024 Bootcamp_IDSwitchReader_Embedded_Code Klasörü Source Klasörü İçine Eklendi** <br/>
