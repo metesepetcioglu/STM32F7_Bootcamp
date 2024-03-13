@@ -5,7 +5,7 @@
 #include "button_relay_driver.h"
 
 
-// Iki periodic ve bir oneshot thread için tanimlamalar
+// Iki periodic ve bir oneshot thread iÃ§in tanimlamalar
 osThreadId_t thread_id_periodic_ds1, thread_id_oneshot;
 
 // Thread callback fonksiyonlari
@@ -14,10 +14,12 @@ void Thread_Periodic_DS1(void *argument);
 void Thread_OneShot(void *argument);
 
 // Sayac degiskenleri
-uint8_t counter_period = 0;
+uint16_t counter_period = 0;
+uint16_t secondCounter = 0;
+
 //uint8_t counter_period_2 = 0;
 
-// Periodik thread özellikleri
+// Periodik thread Ã¶zellikleri
 const osThreadAttr_t thread_attr_periodic_ds1 = {
   .name = "PeriodicThreadDS1",
   .priority = osPriorityNormal,
@@ -25,7 +27,7 @@ const osThreadAttr_t thread_attr_periodic_ds1 = {
 };
 
 
-// OneShot thread özellikleri
+// OneShot thread Ã¶zellikleri
 const osThreadAttr_t thread_attr_oneshot = {
   .name = "OneShotThread",
   .priority = osPriorityNormal,
@@ -36,7 +38,7 @@ const osThreadAttr_t thread_attr_oneshot = {
 // Thread baslatma fonksiyonu
 void StartThreads(void)
 {
-  // Periodik thread DS1 için olustur
+  // Periodik thread DS1 iÃ§in olustur
   thread_id_periodic_ds1 = osThreadNew(Thread_Periodic_DS1, NULL, &thread_attr_periodic_ds1);
 
 
@@ -49,17 +51,49 @@ void Thread_Periodic_DS1(void *argument)
 {
   while (1) 
 	{
+		
+		
+		twoDigitNumber(secondCounter);
+	  counter_period++;
+		
+	 		if(counter_period == 50)
+			{
+				secondCounter++;
+				counter_period = 0;
+			}
+			if(secondCounter==100)
+			{
+				secondCounter=0;
+			}
 	 //0-99 arasi sayac
-		twoDigitNumber(counter_period);
-				
-    counter_period++;
-    if (counter_period > 99) 
-		{
-      counter_period = 0;
-    }
+//		twoDigitNumber(counter_period);
+//				
+//    counter_period++;
+//    if (counter_period > 99) 
+//		{
+//      counter_period = 0;
+//    }
+		
+//		if(counter_period % 2 == 0)
+//		{ //0,2,4,6
+//			twoDigitNumber(counter_period);
+//		}
+//		if(counter_period % 2 == 1)
+//		{
+//			terstentwoDigitNumber(counter_period);
+//		}
+//		counter_period++;
+//		if(counter_period==100)
+//			counter_period=0;
+			
 
-    osDelay(1000); // 1 saniye bekle
+
+//    osDelay(1000); // 1 saniye bekle
+			osDelay(8);		
   }
+	
+	
+			
 }
 
 

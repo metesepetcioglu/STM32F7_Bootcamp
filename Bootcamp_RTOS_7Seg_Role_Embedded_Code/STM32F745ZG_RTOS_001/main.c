@@ -44,6 +44,9 @@ uint32_t HAL_GetTick (void) {
 #endif
 
 
+//int sayac = 0;
+//int secondCounter = 0;
+
 int main(void)
 {
 //MCU functions
@@ -60,12 +63,18 @@ int main(void)
 	  osKernelStart();
   	
     while (1)
-    {
-			
-		
+    {	
+//			sayac++;
+//			if(sayac == 50)
+//			{
+//				secondCounter++;
+//				sayac = 0;
+//			}
+//			twoDigitNumber(secondCounter);
+//			DS1(8);
+//			DS2(1);
+//			
     }
-		
-    
 }
 
 

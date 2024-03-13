@@ -25,6 +25,20 @@
 #define LE2_Port GPIOC
 #define DP2_Port GPIOG
 
+
+
+#define Led1_On HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2,GPIO_PIN_SET)
+#define Led2_On HAL_GPIO_WritePin(GPIOF, GPIO_PIN_3,GPIO_PIN_SET)
+#define Led3_On HAL_GPIO_WritePin(GPIOF, GPIO_PIN_4,GPIO_PIN_SET)
+#define Led4_On HAL_GPIO_WritePin(GPIOF, GPIO_PIN_5,GPIO_PIN_SET)
+
+#define Led1_Off HAL_GPIO_WritePin(GPIOF, GPIO_PIN_2,GPIO_PIN_RESET)
+#define Led2_Off HAL_GPIO_WritePin(GPIOF, GPIO_PIN_3,GPIO_PIN_RESET)
+#define Led3_Off HAL_GPIO_WritePin(GPIOF, GPIO_PIN_4,GPIO_PIN_RESET)
+#define Led4_Off HAL_GPIO_WritePin(GPIOF, GPIO_PIN_5,GPIO_PIN_RESET)
+
+
+
 void DSConfig(void);
 
 void DS1(uint8_t value);
@@ -35,6 +49,7 @@ void DS2_DOT(void);
 void DS1_Clear(void);
 
 void twoDigitNumber(uint8_t val);
+void terstentwoDigitNumber(uint8_t val);
 void InitLEDs(void);
 
 #endif /*__SEVENSEGMENTDISPLAY_DRIVER_H */

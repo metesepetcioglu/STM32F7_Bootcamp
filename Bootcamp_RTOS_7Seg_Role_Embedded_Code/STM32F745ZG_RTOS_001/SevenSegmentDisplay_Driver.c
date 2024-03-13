@@ -90,60 +90,54 @@ void DS1(uint8_t value)
 	  HAL_GPIO_WritePin(BL2_Port,BL2_Pin, GPIO_PIN_RESET);
 	  HAL_GPIO_WritePin(DP1_Port,DP1_Pin, GPIO_PIN_RESET);
 	
-	if(value == 0)
+	
+		// 0-9 araligina çekmek
+	//...
+	// 0000 0001
+	
+//	uint8_t D1_sts = (value | 0x01) == 0x01; //true ya da false return edecek
+//	uint8_t D2_sts = (value | 0x02) == 0x02;
+//	uint8_t D3_sts = (value | 0x04) == 0x04; 
+//	uint8_t D4_sts = (value | 0x08) == 0x08;
+uint8_t D1_sts = (value & 0x01) != 0;
+uint8_t D2_sts = (value & 0x02) != 0;
+uint8_t D3_sts = (value & 0x04) != 0;
+uint8_t D4_sts = (value & 0x08) != 0;
+	
+	//9 -> 1001  - 0,3 Set
+	//8 -> 1000  - 3 Set
+	//7 -> 0111  - 0,1,2 Set
+	//6 -> 0110  - 1,2 Set
+	//5 -> 0101  - 0,2 Set
+	//4 -> 0100  
+	//3 -> 0011  
+	//2 -> 0010
+	//1 -> 0001
+	//0 -> 0000
+	
+	HAL_GPIO_WritePin(D_Port, D0_Pin | D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
+	
+	if(D1_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(D_Port,D0_Pin, GPIO_PIN_SET);
+		//Led1_On; 
 	}
-	else if(value == 1)
+	if(D2_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port, D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin , GPIO_PIN_SET);
+		HAL_GPIO_WritePin(D_Port,D1_Pin, GPIO_PIN_SET);
+		//Led2_On;
 	}
-	else if(value == 2)
+	if(D3_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port, D0_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D1_Pin , GPIO_PIN_SET);
+		HAL_GPIO_WritePin(D_Port,D2_Pin, GPIO_PIN_SET);
+		//Led3_On;
 	}
-	else if(value == 3)
+	if(D4_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port,D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 4)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 5)
-	{
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 6)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 7)
-	{
-		HAL_GPIO_WritePin(D_Port,D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 8)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin , GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(D_Port,D3_Pin, GPIO_PIN_SET);
+		//Led4_On;
 	}
-	else if(value == 9)
-	{
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D2_Pin , GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D3_Pin, GPIO_PIN_SET);
-	}
-	else
-	{
-		HAL_GPIO_WritePin(BL1_Port,BL1_Pin, GPIO_PIN_RESET);
-	}
-	//HAL_Delay(5);
+	
 }
 
 // Display a digit (0-9) on the second 7-segment display (DS2)
@@ -152,60 +146,35 @@ void DS2(uint8_t value)
 		HAL_GPIO_WritePin(BL2_Port,BL2_Pin, GPIO_PIN_SET);
 	  HAL_GPIO_WritePin(BL1_Port,BL1_Pin, GPIO_PIN_RESET);
 	  HAL_GPIO_WritePin(DP2_Port,DP2_Pin, GPIO_PIN_RESET);
-		
-	if(value == 0)
+
+uint8_t D1_sts = (value & 0x01) != 0;
+uint8_t D2_sts = (value & 0x02) != 0;
+uint8_t D3_sts = (value & 0x04) != 0;
+uint8_t D4_sts = (value & 0x08) != 0;
+
+	
+	HAL_GPIO_WritePin(D_Port, D0_Pin | D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
+	if(D1_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(D_Port,D0_Pin, GPIO_PIN_SET);
+		//Led1_On; 
 	}
-	else if(value == 1)
+	if(D2_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port, D1_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin , GPIO_PIN_SET);
+		HAL_GPIO_WritePin(D_Port,D1_Pin, GPIO_PIN_SET);
+		//Led2_On;
 	}
-	else if(value == 2)
+	if(D3_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port, D0_Pin | D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D1_Pin , GPIO_PIN_SET);
+		HAL_GPIO_WritePin(D_Port,D2_Pin, GPIO_PIN_SET);
+		//Led3_On;
 	}
-	else if(value == 3)
+	if(D4_sts == 1)
 	{
-		HAL_GPIO_WritePin(D_Port,D2_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 4)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 5)
-	{
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 6)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 7)
-	{
-		HAL_GPIO_WritePin(D_Port,D3_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin , GPIO_PIN_SET);
-	}
-	else if(value == 8)
-	{
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D1_Pin | D2_Pin , GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(D_Port,D3_Pin, GPIO_PIN_SET);
+		//Led4_On;
 	}
-	else if(value == 9)
-	{
-		HAL_GPIO_WritePin(D_Port,D1_Pin | D2_Pin , GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(D_Port,D0_Pin | D3_Pin, GPIO_PIN_SET);
-	}
-	else
-	{
-		HAL_GPIO_WritePin(BL2_Port,BL2_Pin, GPIO_PIN_RESET);
-	}
+
 }
 
 // Display a dot on the first 7-segment display (DS1)
@@ -261,22 +230,23 @@ void twoDigitNumber(uint8_t val)
 	onlarbasamagi = val/10;
 	 
 	 uint64_t count=10000;
-	 while(count)
-	 {
-   DS1(onlarbasamagi);	
-   //HAL_Delay(1);
-   //delay(1800); //1 ns
-		 delay(1200);
-   //delay(900000);
+//	 while(count)
+//	 {
+//   DS1(onlarbasamagi);	
+//   //HAL_Delay(1);
+//   //delay(1800); //1 ns
+//		 delay(1200);
+//   //delay(900000);
+//   DS2(birlerbasamagi);
+//	 //delay(1800); //1 ns
+//		 delay(600);
+//	 count--;
+//	 }
    DS2(birlerbasamagi);
-	 //delay(1800); //1 ns
-		 delay(600);
-	 count--;
-	 }
-
- }		 
-
- 	
+   HAL_Delay(5);	 
+	 DS1(onlarbasamagi);	 
+	 HAL_Delay(5);
+ }		  	
  else
  {
 	HAL_GPIO_WritePin(BL2_Port,BL2_Pin, GPIO_PIN_RESET);
@@ -285,20 +255,35 @@ void twoDigitNumber(uint8_t val)
 }
 
 
+
+void terstentwoDigitNumber(uint8_t val)
+{
+	if(val >= 0 && val <= 99)
+ {	
+	uint8_t birlerbasamagi, onlarbasamagi;
+	 
+	birlerbasamagi = val % 10;
+	onlarbasamagi = val/10;
+	 
+	 DS1(onlarbasamagi);
+   DS2(birlerbasamagi); 
+	 
+ }		  	
+
+}
+
+
+
 // Initialize F4,F5 pin LEDs 
 void InitLEDs(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   __HAL_RCC_GPIOF_CLK_ENABLE();
 
-  // F4 pin
-  GPIO_InitStruct.Pin = GPIO_PIN_4;
+
+  GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_2 | GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-  // F5 pin
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct); 
 }
